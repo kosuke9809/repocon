@@ -1,0 +1,45 @@
+services:
+  db:
+    build:
+      context: .
+      dockerfile: ./db/Dockerfile
+    env_file:
+      - ./db/.env.local
+    ports:
+      - 5555:5432
+    container_name: postgres
+    restart: always
+    networks:
+      - backend-network
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    env_file:
+      - ./frontend/.env.local
+    ports:
+      - 3333:3000
+    container_name: frontend
+    restart: always
+    networks:
+      - frontend-network
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/build/Dockerfile
+    volumes:
+      - ./backend:/api
+    env_file:
+      - ./backend/.env.local
+    ports:
+      - 8888:8080
+    container_name: backend
+    restart: always
+    networks:
+      - backend-network
+      - frontend-network
+networks:
+  backend-network:
+    driver: bridge
+  frontend-network:
+    driver: bridge
