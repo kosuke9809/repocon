@@ -1,7 +1,7 @@
-FROM golang:1.22.2-bullseye
+FROM golang:1.22.3-bullseye
 
 WORKDIR /api
 
-RUN go install github.com/cosmtrek/air@latest
+RUN go install github.com/air-verse/air@latest
 
-ENTRYPOINT [ "air", "-c", ".air.toml"]
+CMD [ "air", "-c", ".air.toml"]
