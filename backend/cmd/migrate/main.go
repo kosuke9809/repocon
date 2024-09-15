@@ -1,7 +1,11 @@
 package main
 
-import "repocon/infrastructure/postgres/migrate"
+import (
+	"fmt"
+	"repocon/infrastructure/postgres/migrate"
+)
 
 func main() {
+	fmt.Println("Start Migration")
 	migrate.AutoMigrate()
 }

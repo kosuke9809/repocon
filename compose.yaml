@@ -6,7 +6,7 @@ services:
     env_file:
       - ./db/.env.local
     ports:
-      - 5555:5432
+      - 5432:5432
     container_name: postgres
     restart: always
     networks:
@@ -15,10 +15,12 @@ services:
     build:
       context: .
       dockerfile: ./frontend/Dockerfile
+    volumes:
+      - ./frontend:/app
     env_file:
       - ./frontend/.env.local
     ports:
-      - 3333:3000
+      - 3000:3000
     container_name: frontend
     restart: always
     networks:
@@ -32,7 +34,7 @@ services:
     env_file:
       - ./backend/.env.local
     ports:
-      - 8888:8080
+      - 8080:8080
     container_name: backend
     restart: always
     networks:

@@ -1,0 +1,50 @@
+version: '3'
+
+vars:
+  MAKE_DIR: build
+
+tasks:
+  migrate:
+    desc: Run database migrations in the backend container
+    cmds:
+      - docker compose exec -w /api/{{.MAKE_DIR}} backend make migrate
+
+  build:
+    desc: Build the backend in the container
+    cmds:
+      - docker compose exec -w /api/{{.MAKE_DIR}} backend make build
+
+  test:
+    desc: Run tests in the backend container
+    cmds:
+      - docker compose exec -w /api/{{.MAKE_DIR}} backend make test
+
+  deps:
+    desc: Download dependencies in the backend container
+    cmds:
+      - docker compose exec -w /api/{{.MAKE_DIR}} backend make deps
+
+  lint:
+    desc: Run linter in the backend container
+    cmds:
+      - docker compose exec -w /api/{{.MAKE_DIR}} backend make lint
+
+  dev:
+    desc: Set up development environment and run the application
+    cmds:
+      - docker compose exec -w /api/{{.MAKE_DIR}} backend make dev
+
+  clean:
+    desc: Clean build artifacts in the backend container
+    cmds:
+      - docker compose exec -w /api/{{.MAKE_DIR}} backend make clean
+
+  default:
+    desc: Display help information
+    cmds:
+      - task --list
+
+  backend-shell:
+    desc: Open a shell in the backend container
+    cmds:
+      - docker compose exec backend /bin/sh

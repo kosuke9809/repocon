@@ -32,6 +32,9 @@ func (ur *userRepository) FindByGitHubID(githubID int64) (*userDomain.User, erro
 	return &user, nil
 }
 
+func (ur *userRepository) FetchUserInfo(accessToken string) (*userDomain.User, error) {
+}
+
 func (ur *userRepository) Create(user *userDomain.User) error {
 	return ur.db.Create(user).Error
 }

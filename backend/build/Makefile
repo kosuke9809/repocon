@@ -4,9 +4,9 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 GOMOD=$(GOCMD) mod
-BINARY_NAME=.local/main
-MAIN_PATH=cmd/api/main.go
-MIGRATE_PATH=cmd/migrate/main.go
+BINARY_NAME=tmp/main
+MAIN_PATH=../cmd/api/main.go
+MIGRATE_PATH=../cmd/migrate/main.go
 
 all: test build
 
@@ -25,7 +25,7 @@ run:
 	./$(BINARY_NAME)
 
 deps:
-	$(GOMOD) download
+	$(GOMOD) tidy
 
 lint:
 	golangci-lint run
